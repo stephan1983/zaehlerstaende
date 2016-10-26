@@ -9,8 +9,15 @@ Inhalt...
 
 <?php
 	$sql = "SELECT * from zaehler";
-	$mysqli->query($sql);
-
+	$result = $mysqli->query($sql);
+	
+	if ($result->num_rows === 0) {
+    	echo "Keine Datensätze vorhanden.";
+    	exit;
+	}
+	$zaehler = $result->fetch_assoc();
+	
+	echo $zaehler['id']
 ?>
 
 </body>
