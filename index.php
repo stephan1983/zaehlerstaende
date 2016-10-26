@@ -5,7 +5,7 @@
 </head>
 
 <body>
-Inhalt...
+<?php require 'func.php'?>
 
 <?php
 	$sql = "SELECT * from zaehler";
