@@ -9,16 +9,16 @@
 
 <?php
 	$db = new Db();
-	
+	$check_data = new data();
 	
 	if (isset($_POST["insert_zaehler"])) {
-		$insert_zaehler = test_input($_POST["insert_zaehler"]);
+		$insert_zaehler = $check_data -> test_input($_POST["insert_zaehler"]);
 	}
 	if (isset($_POST["art_zaehler"])) {
-		$art_zaehler = test_input($_POST["art_zaehler"]);
+		$art_zaehler = $check_data -> test_input($_POST["art_zaehler"]);
 	}
-
-	$rows = $db -> select("SELECT * from zaehler");
+	
+	/* $rows = $db -> select("SELECT * from zaehler");
 	
 	if ($rows === 0) {
     	echo "Keine Datensätze vorhanden.";
@@ -26,7 +26,9 @@
 	
 	foreach ($rows as $row) {
 		print_r($row);
-	}
+	} 
+	*/
+
 	
 ?>
 
@@ -36,7 +38,16 @@
   <br><br>
   Nummer: <input type="text" name="zaehler_nummer">
   <br><br>
-  Art-ID: <input type="text" name="zaehler_art_id">
+	<label>Art-ID:
+  		<select name="zaehler_art_id">
+  			<?php
+  			$query_art = $db -> select("SELECT id,art from art");
+  			foreach ($query_art as $row) {
+  				echo "<option value=" . $row["id"] . ">" . $row["art"] . "</option>";
+  			}
+  			?>
+  		</select>
+	</label>
   <br><br>
   Status: <input type="text" name="zaehler_status">
   <br><br>
@@ -57,30 +68,31 @@
 			echo "Der Name der Zählerart ist leer";
 		}
 		else {
-			$art_name = test_input($_POST["art_name"]);
-			echo "$art_name";
+			$art_name = $check_data -> test_input($_POST["art_name"]);
+			$db -> query("INSERT INTO art (art) VALUES ('$art_name')");
 		}
 	}
 	
-	if (isset($insert_zaehler)) {	
+	if (isset($insert_zaehler)) {
 		if (isset($_POST["zaehler_name"])) {
-			$zaehler_name = test_input($_POST["zaehler_name"]);
+			$zaehler_name = $check_data -> test_input($_POST["zaehler_name"]);
+			echo $zaehler_name;
 		}
-		echo $zaehler_name;
 		echo "<br>";
 		if (isset($_POST["zaehler_nummer"])) {
-			$zaehler_nummer = test_input($_POST["zaehler_nummer"]);
+			$zaehler_nummer = $check_data -> test_input($_POST["zaehler_nummer"]);
+			echo $zaehler_nummer;
 		}
 		echo $zaehler_nummer;
 		if (isset($_POST["zaehler_art_id"])) {
-			$zaehler_art_id = test_input($_POST["zaehler_art_id"]);
+			$zaehler_art_id = $check_data -> test_input($_POST["zaehler_art_id"]);
+			echo $zaehler_art_id;
 		}
 		if (isset($_POST["zaehler_status"])) {
-			$zaehler_status = test_input($_POST["zaehler_status"]);
+			$zaehler_status = $check_data -> test_input($_POST["zaehler_status"]);
+			echo $zaehler_status;
 		}
-		
-		$sql_insert = $db -> insert($zaehler_art_id,$zaehler_name, $zaehler_nummer, $zaehler_status);
-		echo $sql_insert;
+		$db -> query("INSERT INTO zaehler (art_id,name,nummer,status) VALUES ('$zaehler_art_id','$zaehler_name','$zaehler_nummer','$zaehler_status')");
 		
 	}
 ?>

@@ -81,13 +81,16 @@ class Db {
         
 }
 
+class data {
 
-#Eingabewerte sicher machen
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
+	// Eingabewerte sicher machen
+	public function test_input($data) {
+  		$data = trim($data);
+  		$data = stripslashes($data);
+  		$data = htmlspecialchars($data);
+  		return $data;
+  	}
+}	
+
 
 ?>
