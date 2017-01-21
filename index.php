@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<link rel="stylesheet" href="stylesheet.css">
 <title>Zählerstand</title>
 </head>
 
@@ -33,26 +34,32 @@
 ?>
 
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Zähler: <input type="text" name="zaehler_name">
-  <br><br>
-  Nummer: <input type="text" name="zaehler_nummer">
-  <br><br>
-	<label>Art-ID:
-  		<select name="zaehler_art_id">
-  			<?php
-  			$query_art = $db -> select("SELECT id,art from art");
-  			foreach ($query_art as $row) {
-  				echo "<option value=" . $row["id"] . ">" . $row["art"] . "</option>";
-  			}
-  			?>
-  		</select>
-	</label>
-  <br><br>
-  Status: <input type="text" name="zaehler_status">
-  <br><br>
-  <input type="hidden" name="insert_zaehler" value="1">
-  <input type="submit" name="submit" value="Submit">  
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="formbox">  
+	<div>
+		<p class="label">Zähler:</p> <input type="text" name="zaehler_name">
+  	</div>
+  	<div>
+  		<p class="label">Nummer:</p> <input type="text" name="zaehler_nummer">
+	</div>
+	<div>
+		<label><p class="label">Art-ID:</p>
+  			<select name="zaehler_art_id">
+  				<?php
+  				$query_art = $db -> select("SELECT id,art from art");
+  				foreach ($query_art as $row) {
+  					echo "<option value=" . $row["id"] . ">" . $row["art"] . "</option>";
+  				}
+  				?>
+  			</select>
+		</label>
+	</div>
+  <div>
+  	<p class="label">Status:</p> <input type="text" name="zaehler_status">
+  </div>
+  <div>
+  	<input type="hidden" name="insert_zaehler" value="1">
+	<input type="submit" name="submit" value="Submit" class="submit">
+  </div>
 </form>
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  

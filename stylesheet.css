@@ -1,0 +1,22 @@
+.formbox {
+	display: inline-block;
+  	width: 300px;
+  	color: #000;
+  	background-color: #bfc1bd;
+  	border: 1px solid #666;
+  	padding: 10px;
+  	margin: 10px;
+}
+
+p.label {
+	display: inline-block;
+	width: 80px;
+	margin: 5px 5px 5px 5px;
+}
+
+.submit {
+	color: black;
+	display: inline-block;
+	width: 80px;
+	margin: 5px 5px 5px 5px;
+}
